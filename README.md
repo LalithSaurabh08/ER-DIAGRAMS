@@ -15,3 +15,7 @@ Ensure you have **Quarto** and **Graphviz** installed on your system.
 Run the following command in the terminal:
 ```sh
 quarto render er_diagram.qmd --to html
+start report.html   # Windows
+open report.html    # macOS
+xdg-open report.html  # Linux
+
