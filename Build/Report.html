@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW-2 ENTITY RELATION DIAGRAMS</title>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+<body>
+    <h1>HW-2 ENTITY RELATION DIAGRAMS</h1>
+    <h2>Authors: SAI SRUJAN SEELAM, PRANEETH POLASI, PRADHYUN MADDERLA, LALITH SAURABH GOLLAPUDI</h2>
+
+    <hr>
+    <h2>1. Library Management System</h2>
+    <p>A library manages books, members, and loans.</p>
+
+    <h3>Entities</h3>
+    <ul>
+        <li><b>Book</b> (book ID, title, author)</li>
+        <li><b>Member</b> (member ID, name, membership date)</li>
+        <li><b>Loan</b> (loan ID, loan date, return date)</li>
+    </ul>
+
+    <h3>Relationships</h3>
+    <ul>
+        <li>A member borrows multiple books.</li>
+        <li>A book can be borrowed by multiple members over time.</li>
+        <li>Each loan is tied to one member and one book.</li>
+    </ul>
+
+    <h3>Chen ER Diagram (Graphviz)</h3>
+    <img src="https://quickchart.io/graphviz?graph=digraph%20LibraryManagement%20%7B%0A%20%20%20%20node%20%5Bshape%3Drectangle%5D%0A%20%20%20%20Book%20%5Blabel%3D%22%7B%20Book%20%7C%20BookID%20%3A%20String%20%7C%20Title%20%3A%20String%20%7C%20Author%20%3A%20String%20%7D%22%5D%3B%0A%20%20%20%20Member%20%5Blabel%3D%22%7B%20Member%20%7C%20MemberID%20%3A%20String%20%7C%20Name%20%3A%20String%20%7C%20MembershipDate%20%3A%20Date%20%7D%22%5D%3B%0A%20%20%20%20Loan%20%5Bshape%3Dellipse%2C%20label%3D%22%7B%20Loan%20%7C%20LoanID%20%3A%20Int%20%7C%20LoanDate%20%3A%20Date%20%7C%20ReturnDate%20%3A%20Date%20%7D%22%5D%3B%0A%0A%20%20%20%20BorrowedBy%20%5Bshape%3Ddiamond%2C%20label%3D%22borrowed%22%5D%3B%0A%20%20%20%20Makes%20%5Bshape%3Ddiamond%2C%20label%3D%22makes%22%5D%3B%0A%0A%20%20%20%20Book%20-%3E%20BorrowedBy%3B%0A%20%20%20%20BorrowedBy%20-%3E%20Loan%3B%0A%20%20%20%20Member%20-%3E%20Makes%3B%0A%20%20%20%20Makes%20-%3E%20Loan%3B%0A%7D" alt="Library Management ER Diagram">
+
+    <h3>Crow's Foot ER Diagram (Mermaid)</h3>
+    <div class="mermaid">
+        erDiagram
+            Book {
+                string BookID
+                string Title
+                string Author
+            }
+            Member {
+                string MemberID
+                string Name
+                date MembershipDate
+            }
+            Loan {
+                int LoanID
+                date LoanDate
+                date ReturnDate
+            }
+            Book ||--o{ Loan : "borrowed"
+            Member ||--o{ Loan : "makes"
+            Loan }o--|| Member : "by"
+            Loan }o--|| Book : "for"
+    </div>
+
+    <hr>
+    <h2>2. Restaurant Reservation System</h2>
+    <p>A restaurant manages reservations, customers, and tables.</p>
+
+    <h3>Entities</h3>
+    <ul>
+        <li><b>Customer</b> (customer ID, name, contact number)</li>
+        <li><b>Reservation</b> (reservation ID, date, time)</li>
+        <li><b>Table</b> (table number, seating capacity, location)</li>
+    </ul>
+
+    <h3>Relationships</h3>
+    <ul>
+        <li>A customer can make multiple reservations.</li>
+        <li>A table can have multiple reservations over time.</li>
+        <li>Each reservation links one customer to one table.</li>
+    </ul>
+
+    <h3>Crow's Foot ER Diagram (Mermaid)</h3>
+    <div class="mermaid">
+        erDiagram
+            Customer {
+                string CustomerID
+                string Name
+                string ContactNumber
+            }
+            Reservation {
+                string ReservationID
+                date Date
+                time Time
+            }
+            Table {
+                string TableNumber
+                int SeatingCapacity
+                string Location
+            }
+            Customer ||--o{ Reservation : "books"
+            Table ||--o{ Reservation : "is for"
+            Reservation }o--|| Customer : "by"
+            Reservation }o--|| Table : "for"
+    </div>
+
+    <hr>
+    <h2>3. Real Estate Listing System</h2>
+    <p>A real estate agency tracks properties, agents, and clients.</p>
+
+    <h3>Entities</h3>
+    <ul>
+        <li><b>Property</b> (property ID, address, listing price)</li>
+        <li><b>Agent</b> (agent ID, name, contact information)</li>
+        <li><b>Client</b> (client ID, name, budget)</li>
+    </ul>
+
+    <h3>Relationships</h3>
+    <ul>
+        <li>One agent lists multiple properties.</li>
+        <li>A property is listed by only one agent.</li>
+        <li>Clients can be interested in multiple properties.</li>
+        <li>A property can have multiple interested clients.</li>
+    </ul>
+
+    <h3>Crow's Foot ER Diagram (Mermaid)</h3>
+    <div class="mermaid">
+        erDiagram
+            Property {
+                string PropertyID
+                string Address
+                float ListingPrice
+            }
+            Agent {
+                string AgentID
+                string Name
+                string ContactInfo
+            }
+            Client {
+                string ClientID
+                string Name
+                float Budget
+            }
+            Agent ||--o{ Property : "lists"
+            Client ||--o{ Interest : "expresses"
+            Property ||--o{ Interest : "gains"
+            Interest }o--|| Client : "for"
+            Interest }o--|| Property : "for"
+    </div>
+
+</body>
+</html>
