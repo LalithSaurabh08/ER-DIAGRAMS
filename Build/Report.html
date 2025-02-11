@@ -4,12 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HW-2 ENTITY RELATION DIAGRAMS</title>
+    
+    <!-- Mermaid.js for ER Diagrams -->
     <script type="module">
         import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
         mermaid.initialize({ startOnLoad: true });
     </script>
+
+    <!-- CSS for Styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 40px;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+        }
+        hr {
+            border: 1px solid #ccc;
+            margin: 20px 0;
+        }
+        p, ul {
+            color: #555;
+        }
+        ul {
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .mermaid {
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            overflow: auto;
+        }
+    </style>
 </head>
 <body>
+
     <h1>HW-2 ENTITY RELATION DIAGRAMS</h1>
     <h2>Authors: SAI SRUJAN SEELAM, PRANEETH POLASI, PRADHYUN MADDERLA, LALITH SAURABH GOLLAPUDI</h2>
 
@@ -31,8 +74,11 @@
         <li>Each loan is tied to one member and one book.</li>
     </ul>
 
-    <h3>Chen ER Diagram (Graphviz)</h3>
-    <img src="https://quickchart.io/graphviz?graph=digraph%20LibraryManagement%20%7B%0A%20%20%20%20node%20%5Bshape%3Drectangle%5D%0A%20%20%20%20Book%20%5Blabel%3D%22%7B%20Book%20%7C%20BookID%20%3A%20String%20%7C%20Title%20%3A%20String%20%7C%20Author%20%3A%20String%20%7D%22%5D%3B%0A%20%20%20%20Member%20%5Blabel%3D%22%7B%20Member%20%7C%20MemberID%20%3A%20String%20%7C%20Name%20%3A%20String%20%7C%20MembershipDate%20%3A%20Date%20%7D%22%5D%3B%0A%20%20%20%20Loan%20%5Bshape%3Dellipse%2C%20label%3D%22%7B%20Loan%20%7C%20LoanID%20%3A%20Int%20%7C%20LoanDate%20%3A%20Date%20%7C%20ReturnDate%20%3A%20Date%20%7D%22%5D%3B%0A%0A%20%20%20%20BorrowedBy%20%5Bshape%3Ddiamond%2C%20label%3D%22borrowed%22%5D%3B%0A%20%20%20%20Makes%20%5Bshape%3Ddiamond%2C%20label%3D%22makes%22%5D%3B%0A%0A%20%20%20%20Book%20-%3E%20BorrowedBy%3B%0A%20%20%20%20BorrowedBy%20-%3E%20Loan%3B%0A%20%20%20%20Member%20-%3E%20Makes%3B%0A%20%20%20%20Makes%20-%3E%20Loan%3B%0A%7D" alt="Library Management ER Diagram">
+    <h3>Design Decisions</h3>
+    <ul>
+        <li><b>Weak Entities:</b> No weak entities were introduced since all entities can be uniquely identified.</li>
+        <li><b>Relationships:</b> Established many-to-many relationships between members and books through loans.</li>
+    </ul>
 
     <h3>Crow's Foot ER Diagram (Mermaid)</h3>
     <div class="mermaid">
@@ -76,6 +122,12 @@
         <li>Each reservation links one customer to one table.</li>
     </ul>
 
+    <h3>Design Decisions</h3>
+    <ul>
+        <li><b>Composite Attributes:</b> None were needed, as each attribute is atomic.</li>
+        <li><b>Relationships:</b> Many-to-one relationships were established between reservations and both customers and tables.</li>
+    </ul>
+
     <h3>Crow's Foot ER Diagram (Mermaid)</h3>
     <div class="mermaid">
         erDiagram
@@ -117,6 +169,12 @@
         <li>A property is listed by only one agent.</li>
         <li>Clients can be interested in multiple properties.</li>
         <li>A property can have multiple interested clients.</li>
+    </ul>
+
+    <h3>Design Decisions</h3>
+    <ul>
+        <li><b>Multivalued Attributes:</b> No multivalued attributes were necessary, and each attribute is kept simple.</li>
+        <li><b>Weak Entities:</b> There were no weak entities since properties, agents, and clients can be uniquely identified by their IDs.</li>
     </ul>
 
     <h3>Crow's Foot ER Diagram (Mermaid)</h3>
